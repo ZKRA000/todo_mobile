@@ -5,6 +5,9 @@ import 'package:intl/intl.dart';
 import '../functions/date_functions.dart';
 import '../functions/widget_functions.dart';
 
+// models
+import '../models/easy_date.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -13,12 +16,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int testing = 1;
+  bool empty = false;
   final controller = ScrollController();
   final testingKey = GlobalKey();
   final dateTime = DateFormat('EEEE, d MMM y').format(DateTime.now());
   final month = DateFormat('E').format(DateTime.now());
 
-  List<Map<dynamic, dynamic>> extraxtedDates = [];
+  List<EasyDate> extraxtedDates = [];
 
   @override
   void initState() {
@@ -46,6 +51,7 @@ class _HomeState extends State<Home> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
                 padding:
@@ -81,7 +87,7 @@ class _HomeState extends State<Home> {
                 controller: controller,
                 child: Row(
                   children: [
-                    for (Map<dynamic, dynamic> x in extraxtedDates)
+                    for (EasyDate x in extraxtedDates)
                       Container(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -93,10 +99,10 @@ class _HomeState extends State<Home> {
                                 color: const Color(0xFFE6E6E6),
                                 borderRadius: BorderRadius.circular(50),
                               ),
-                              child: Center(child: Text(x['day'])),
+                              child: Center(child: Text(x.day)),
                             ),
                             const SizedBox(height: 12),
-                            Text(x['month'])
+                            Text(x.month)
                           ],
                         ),
                       ),
@@ -112,7 +118,7 @@ class _HomeState extends State<Home> {
                               color: const Color(0xFFE6E6E6),
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            child: Center(child: Text('test')),
+                            child: const Center(child: Text('test')),
                           ),
                           const SizedBox(height: 12),
                           const Text('testing')
@@ -122,9 +128,77 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: const Text('08 am'),
+                          ),
+                          Expanded(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minHeight: 80,
+                                maxHeight: 120,
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFAEE2FF),
+                                    borderRadius: BorderRadius.circular(24)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF6B7AA1),
+                                        fontSize: 16,
+                                      ),
+                                      'family',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    if (empty)
+                      Center(
+                        child: Opacity(
+                          opacity: 0.5,
+                          child: Icon(
+                            Icons.event_busy,
+                            size: MediaQuery.of(context).size.width * 0.3,
+                          ),
+                        ),
+                      )
+                  ],
+                ),
+              )
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            extraxtedDates.insert(0, const EasyDate('Wed', '1', 'Feb', '2023'));
+            testing++;
+          });
+        },
+        child: Text(testing.toString()),
       ),
     );
   }
