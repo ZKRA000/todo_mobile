@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// component
+import '../components/event_tile.dart';
+
 // functions
 import '../functions/date_functions.dart';
 import '../functions/widget_functions.dart';
@@ -132,48 +135,7 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(right: 12),
-                            child: const Text('08 am'),
-                          ),
-                          Expanded(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                minHeight: 80,
-                                maxHeight: 120,
-                              ),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 12,
-                                  horizontal: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFAEE2FF),
-                                    borderRadius: BorderRadius.circular(24)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF6B7AA1),
-                                        fontSize: 16,
-                                      ),
-                                      'family',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    const EventTile(),
                     if (empty)
                       Center(
                         child: Opacity(
