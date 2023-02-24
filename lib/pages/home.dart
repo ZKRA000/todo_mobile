@@ -135,7 +135,16 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: Stack(
                   children: [
-                    const EventTile(),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: const [
+                          EventTile(),
+                          EventTile(),
+                          EventTile(),
+                          EventTile(),
+                        ],
+                      ),
+                    ),
                     if (empty)
                       Center(
                         child: Opacity(
