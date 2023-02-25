@@ -137,6 +137,7 @@ class _HomeState extends State<Home> {
                   children: [
                     SingleChildScrollView(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: const [
                           EventTile(),
                           EventTile(),
@@ -162,14 +163,77 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            extraxtedDates.insert(0, const EasyDate('Wed', '1', 'Feb', '2023'));
-            testing++;
-          });
-        },
-        child: Text(testing.toString()),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.all(4),
+        height: 68,
+        width: 68,
+        child: RawMaterialButton(
+          elevation: 0.0,
+          textStyle: const TextStyle(
+            color: Colors.white,
+          ),
+          fillColor: Colors.blue,
+          shape: const CircleBorder(),
+          onPressed: () {
+            setState(() {
+              extraxtedDates.insert(
+                  0, const EasyDate('Wed', '1', 'Feb', '2023'));
+              testing++;
+            });
+          },
+          child: const Icon(
+            size: 32,
+            Icons.add,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        height: 58,
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: Icon(Icons.home),
+                    ),
+                  ),
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: Icon(Icons.home),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: Icon(Icons.home),
+                    ),
+                  ),
+                  Expanded(
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: Icon(Icons.home),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
