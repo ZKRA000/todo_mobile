@@ -175,11 +175,63 @@ class _HomeState extends State<Home> {
           fillColor: Colors.blue,
           shape: const CircleBorder(),
           onPressed: () {
-            setState(() {
-              extraxtedDates.insert(
-                  0, const EasyDate('Wed', '1', 'Feb', '2023'));
-              testing++;
-            });
+            showModalBottomSheet(
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                context: context,
+                builder: (BuildContext ctx) {
+                  return Container(
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      right: 16.0,
+                      top: 32.0,
+                    ),
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          'Create New Task',
+                        ),
+                        const SizedBox(height: 20.0),
+                        const Text(
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          'Title',
+                        ),
+                        const SizedBox(height: 8.0),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFEDEDED),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(100.0),
+                            ),
+                          ),
+                          child: const TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Type Title',
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
           },
           child: const Icon(
             size: 32,
@@ -190,7 +242,7 @@ class _HomeState extends State<Home> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         height: 58,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -220,13 +272,13 @@ class _HomeState extends State<Home> {
                   Expanded(
                     child: MaterialButton(
                       onPressed: () {},
-                      child: Icon(Icons.home),
+                      child: const Icon(Icons.settings),
                     ),
                   ),
                   Expanded(
                     child: MaterialButton(
                       onPressed: () {},
-                      child: Icon(Icons.home),
+                      child: const Icon(Icons.person),
                     ),
                   ),
                 ],
