@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// page
+import 'add_task_form.dart';
+
 // component
 import '../components/event_tile.dart';
 
@@ -10,6 +13,9 @@ import '../functions/widget_functions.dart';
 
 // models
 import '../models/easy_date.dart';
+
+// style
+import '../style/style.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -66,18 +72,12 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: h2,
                           'Today',
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: h3,
                           dateTime,
                         ),
                       ],
@@ -102,10 +102,18 @@ class _HomeState extends State<Home> {
                                 color: const Color(0xFFE6E6E6),
                                 borderRadius: BorderRadius.circular(50),
                               ),
-                              child: Center(child: Text(x.day)),
+                              child: Center(
+                                child: Text(
+                                  style: p,
+                                  x.day,
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 12),
-                            Text(x.month)
+                            Text(
+                              style: p,
+                              x.month,
+                            )
                           ],
                         ),
                       ),
@@ -176,62 +184,16 @@ class _HomeState extends State<Home> {
           shape: const CircleBorder(),
           onPressed: () {
             showModalBottomSheet(
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
-                context: context,
-                builder: (BuildContext ctx) {
-                  return Container(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      right: 16.0,
-                      top: 32.0,
-                    ),
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          'Create New Task',
-                        ),
-                        const SizedBox(height: 20.0),
-                        const Text(
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          'Title',
-                        ),
-                        const SizedBox(height: 8.0),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFEDEDED),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(100.0),
-                            ),
-                          ),
-                          child: const TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Type Title',
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                });
+              ),
+              context: context,
+              builder: (BuildContext ctx) => const AddTaskForm(),
+            );
           },
           child: const Icon(
             size: 32,
