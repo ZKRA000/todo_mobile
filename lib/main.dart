@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Pages
 import './pages/home.dart';
+import './pages/calendar_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        'calendar-form': (BuildContext context) => const CalendarForm(),
+      },
       home: const Home(),
     );
   }

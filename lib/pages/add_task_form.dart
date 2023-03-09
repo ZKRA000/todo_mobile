@@ -3,8 +3,42 @@ import 'package:flutter/material.dart';
 // style
 import '../style/style.dart';
 
-class AddTaskForm extends StatelessWidget {
+// page
+import './calendar_form.dart';
+
+class AddTaskForm extends StatefulWidget {
   const AddTaskForm({super.key});
+
+  @override
+  State<AddTaskForm> createState() => _AddTaskForm();
+}
+
+class _AddTaskForm extends State<AddTaskForm> with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+  late Animation<double> curve;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 700), vsync: this);
+    curve = CurvedAnimation(parent: controller, curve: Curves.bounceOut);
+    animation = Tween<double>(begin: 0.5, end: 1.0).animate(curve)
+      ..addListener(() {
+        setState(() {});
+      });
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +48,7 @@ class AddTaskForm extends StatelessWidget {
         right: 16.0,
         top: 32.0,
       ),
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.75,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -133,6 +167,33 @@ class AddTaskForm extends StatelessWidget {
                 'Add Description',
               )
             ],
+          ),
+          const SizedBox(height: 20.0),
+          Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width * animation.value,
+              height: 56.0,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.resolveWith((states) {
+                    return RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    );
+                  }),
+                ),
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      style: h4,
+                      'Add',
+                    ),
+                    Icon(Icons.add),
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ),

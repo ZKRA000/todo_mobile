@@ -14,6 +14,11 @@ const TextStyle h3 = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle h4 = TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+);
+
 const TextStyle h5 = TextStyle(
   fontSize: 12.0,
   fontWeight: FontWeight.bold,
